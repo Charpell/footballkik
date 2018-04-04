@@ -7,7 +7,7 @@ const validator = require('express-validator')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const mongoose = require('mongoose')
-const flash = require('flash')
+const flash = require('connect-flash')
 const passport = require('passport');
 
 
@@ -51,11 +51,11 @@ container.resolve(function (users) {
       saveUninitialized: true,
       store: new MongoStore({ mongooseConnection: mongoose.connection })
     }))
+
+    app.use(flash())
+
+    app.use(passport.initialize())
+    app.use(passport.session())
   }
-
-  app.use(flash())
-
-  app.use(passport.initialize())
-  app.use(passport.session())
 
 })
