@@ -23,9 +23,9 @@ module.exports = function () {
                 })
                 .catch((err) => {
                     return next();
-                })
+                });
         },
-        
+
         LoginValidation: (req, res, next) => {
             req.checkBody('email', 'Email is Required').notEmpty();
             req.checkBody('email', 'Email is Invalid').isEmail();
@@ -45,8 +45,8 @@ module.exports = function () {
                 })
                 .catch((err) => {
                     return next();
-                })
+                });
         }
 
-    }
-}
+    };
+};
