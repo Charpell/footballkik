@@ -13,7 +13,7 @@ const passport = require('passport');
 
 const container = require('./container')
 
-container.resolve(function (users) {
+container.resolve(function (users, _) {
 
   mongoose.Promise = global.Promise;
   mongoose.connect('mongodb://localhost/footballkik', { useMongoClient: true })
@@ -58,6 +58,9 @@ container.resolve(function (users) {
 
     app.use(passport.initialize())
     app.use(passport.session())
+
+    // Set lodash as a global variable, this is how express set global variables in node
+    app.locals._ = _;
   }
 
 })
