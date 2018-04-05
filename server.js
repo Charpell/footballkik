@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
@@ -30,7 +32,7 @@ container.resolve(function (users, _) {
 
     // Setup router
     const router = require('express-promise-router')();
-    
+
     users.SetRouting(router);
 
     app.use(router);
@@ -39,7 +41,8 @@ container.resolve(function (users, _) {
 
   function ConfigureExpress(app) {
     require('./passport/passport-local');
-    
+    require('./passport/passport-facebook');
+
     app.use(express.static('public'));
     app.use(cookieParser());
     app.set('view engine', 'ejs');
